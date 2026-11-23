@@ -1,37 +1,51 @@
-import { useState } from 'react';
+import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
+import Layout from './components/Layout';
+import { Spinner } from './components/ui';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import Adherents from './pages/Adherents';
+import AdherentDetail from './pages/AdherentDetail';
+import Abonnements from './pages/Abonnements';
+import Paiements from './pages/Paiements';
+import TypesAbonnement from './pages/TypesAbonnement';
+import CoursPage from './pages/Cours';
+import Presences from './pages/Presences';
+import Machines from './pages/Machines';
+import Pannes from './pages/Pannes';
+import Maintenances from './pages/Maintenances';
+import Personnel from './pages/Personnel';
+
+/** F03 : sans session, toute page administrative redirige vers la connexion. */
+function Protected() {
+  const { user, loading } = useAuth();
+  const location = useLocation();
+  if (loading) return <div className="p-20"><Spinner /></div>;
+  if (!user) return <Navigate to="/connexion" replace state={{ from: location.pathname }} />;
+  return <Outlet />;
+}
 
 export default function App() {
-  const [message, setMessage] = useState('Vérifiez la connexion à l’API et à PostgreSQL pour démarrer.');
-  const [checking, setChecking] = useState(false);
-
-  async function checkConnection(): Promise<void> {
-    setChecking(true);
-    setMessage('Vérification en cours…');
-    try {
-      const response = await fetch('/api/health', { signal: AbortSignal.timeout(5000) });
-      if (!response.ok) {
-        throw new Error('Service indisponible');
-      }
-      setMessage('L’API et la base PostgreSQL sont disponibles.');
-    } catch {
-      setMessage('Connexion indisponible. Vérifiez que la base et le serveur NestJS sont démarrés.');
-    } finally {
-      setChecking(false);
-    }
-  }
-
   return (
-    <main>
-      <p className="eyebrow">Gestion de salle de sport</p>
-      <h1>GymManager</h1>
-      <p className="description">Adhérents, abonnements et paiements dans un même espace.</p>
-      <section aria-labelledby="environment-title">
-        <h2 id="environment-title">Environnement de développement</h2>
-        <p role="status">{message}</p>
-        <button type="button" onClick={() => void checkConnection()} disabled={checking}>
-          {checking ? 'Vérification…' : 'Vérifier la connexion'}
-        </button>
-      </section>
-    </main>
+    <Routes>
+      <Route path="/connexion" element={<Login />} />
+      <Route element={<Protected />}>
+        <Route element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="adherents" element={<Adherents />} />
+          <Route path="adherents/:id" element={<AdherentDetail />} />
+          <Route path="abonnements" element={<Abonnements />} />
+          <Route path="paiements" element={<Paiements />} />
+          <Route path="offres" element={<TypesAbonnement />} />
+          <Route path="cours" element={<CoursPage />} />
+          <Route path="presences" element={<Presences />} />
+          <Route path="machines" element={<Machines />} />
+          <Route path="pannes" element={<Pannes />} />
+          <Route path="maintenances" element={<Maintenances />} />
+          <Route path="personnel" element={<Personnel />} />
+        </Route>
+      </Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }

@@ -1,0 +1,874 @@
+﻿
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   GYMMANAGER - PREMIUM BLACK & RED THEME
+========================================= */
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  color: #f8fafc;
+  background: #101014;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --gm-red: #ef3038;
+  --gm-red-dark: #c51e29;
+  --gm-background: #101014;
+  --gm-panel: #19191f;
+  --gm-border: #303039;
+  --gm-muted: #92929f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+body {
+  background: var(--gm-background);
+  color: #f8fafc;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================================
+   INPUTS AND TABLES
+========================================= */
+
+@layer components {
+  .input {
+    @apply w-full rounded-xl border px-3 py-2.5 text-sm outline-none transition;
+    background: #202027;
+    border-color: #383842;
+    color: white;
+  }
+
+  .input:focus {
+    border-color: var(--gm-red);
+    box-shadow: 0 0 0 3px rgba(239, 48, 56, 0.15);
+  }
+
+  .input:disabled {
+    @apply cursor-not-allowed;
+    background: #25252c;
+    color: #92929f;
+  }
+
+  .input-error {
+    @apply border-red-500;
+  }
+
+  .th {
+    @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-wider;
+    background: #202027;
+    color: #aaaab5;
+  }
+
+  .td {
+    @apply px-4 py-3 text-sm;
+    color: #e5e5eb;
+  }
+}
+
+/* =========================================
+   GLOBAL BRAND COLORS
+========================================= */
+
+.bg-brand-900 {
+  background-color: #141419 !important;
+}
+
+.bg-brand-600 {
+  background-color: var(--gm-red) !important;
+}
+
+.bg-brand-700 {
+  background-color: var(--gm-red-dark) !important;
+}
+
+.bg-brand-500 {
+  background-color: #ff454d !important;
+}
+
+.text-brand-600 {
+  color: var(--gm-red) !important;
+}
+
+.border-brand-500,
+.border-brand-600 {
+  border-color: var(--gm-red) !important;
+}
+
+.ring-brand-500 {
+  --tw-ring-color: rgba(239, 48, 56, 0.3) !important;
+}
+
+section, table {
+  border-color: var(--gm-border);
+}
+
+tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: rgba(239, 48, 56, 0.06);
+}
+
+button {
+  transition: all 0.2s ease;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(239, 48, 56, 0.4);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+.gm-layout {
+  min-height: 100vh;
+  background: #101014;
+}
+
+.gm-main {
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.gm-sidebar {
+  width: 270px;
+  min-width: 270px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 17px 18px;
+  background: #141419;
+  border-right: 1px solid #292930;
+  z-index: 40;
+}
+
+.gm-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 2px 7px 27px;
+}
+
+.gm-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  color: white;
+  background: linear-gradient(135deg, #ff424a, #bd1523);
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(239, 48, 56, 0.3);
+}
+
+.gm-logo-large {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+}
+
+/* =========================================
+   STATUS
+========================================= */
+
+.gm-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(34, 197, 94, 0.18);
+  border-radius: 11px;
+  background: rgba(34, 197, 94, 0.07);
+  color: #4ade80;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.gm-status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+}
+
+.gm-section-title {
+  padding: 0 10px;
+  margin-bottom: 11px;
+  color: #92929f;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.gm-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin: 3px 0;
+  color: #a0a0ad;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.gm-nav-item:hover {
+  background: rgba(239, 48, 56, 0.10);
+  color: #ff555d;
+  transform: translateX(2px);
+}
+
+.gm-nav-arrow {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.gm-nav-item:hover .gm-nav-arrow,
+.gm-nav-active .gm-nav-arrow {
+  opacity: 0.8;
+}
+
+.gm-nav-active {
+  background: linear-gradient(100deg, #e62c36, #bd1d29) !important;
+  color: white !important;
+  box-shadow: 0 5px 18px rgba(239, 48, 56, 0.24);
+}
+
+.gm-nav-active:hover {
+  background: #c51e29 !important;
+  color: white !important;
+}
+
+/* =========================================
+   USER PROFILE
+========================================= */
+
+.gm-user-panel {
+  border-top: 1px solid #303039;
+  padding-top: 18px;
+  margin-top: 20px;
+}
+
+.gm-avatar {
+  width: 39px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff555d;
+  background: rgba(239, 48, 56, 0.12);
+  border: 1px solid rgba(239, 48, 56, 0.2);
+  border-radius: 12px;
+}
+
+.gm-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 17px;
+  padding: 11px 12px;
+  color: #ff626a;
+  background: rgba(239, 48, 56, 0.09);
+  border: 1px solid rgba(239, 48, 56, 0.2);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.gm-logout:hover {
+  background: rgba(239, 48, 56, 0.2);
+}
+
+/* =========================================
+   TOPBAR
+========================================= */
+
+.gm-topbar {
+  height: 76px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 34px;
+  background: #17171d;
+  border-bottom: 1px solid #303039;
+}
+
+.gm-system-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border: 1px solid #33333c;
+  border-radius: 30px;
+  background: #202027;
+}
+
+/* =========================================
+   GYM BACKGROUND
+========================================= */
+
+.gm-content {
+  position: relative;
+  isolation: isolate;
+  padding: 30px 34px;
+  max-width: 1800px;
+  min-height: calc(100vh - 76px);
+  margin: 0 auto;
+
+  background-color: #101014;
+  background-image:
+    linear-gradient(
+      rgba(8, 8, 12, 0.05),
+      rgba(8, 8, 12, 0.12)
+    ),
+    url("/images/gym.jpg");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* =========================================
+   MOBILE HEADER
+========================================= */
+
+.gm-mobile-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 17px;
+  background: #141419;
+  border-bottom: 1px solid #303039;
+}
+
+.gm-menu-button {
+  padding: 9px;
+  color: white;
+  background: #25252c;
+  border: 1px solid #383842;
+  border-radius: 10px;
+}
+
+.gm-menu-button:hover {
+  background: #383039;
+  color: #ff555d;
+}
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #141419;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #48404a;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e3333d;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1023px) {
+  .gm-sidebar {
+    position: fixed;
+    top: 65px;
+    left: 0;
+    height: calc(100vh - 65px);
+    width: 280px;
+    min-width: 280px;
+    box-shadow: 10px 10px 35px rgba(0, 0, 0, 0.4);
+  }
+
+  .gm-sidebar-closed {
+    display: none;
+  }
+
+  .gm-sidebar-open {
+    display: flex;
+  }
+
+  .gm-content {
+    padding: 22px 17px;
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 640px) {
+  .gm-content {
+    padding: 18px 13px;
+  }
+
+  .gm-topbar {
+    padding: 0 17px;
+  }
+}
+
+/* =========================================
+   TABLE VISIBILITY
+========================================= */
+
+table {
+  color: #f8fafc !important;
+}
+
+thead th,
+.th {
+  color: #ffffff !important;
+  background: #202027 !important;
+}
+
+tbody td,
+.td {
+  color: #e5e5eb !important;
+}
+
+tbody td:first-child {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+tbody tr {
+  background-color: rgba(25, 25, 31, 0.94);
+}
+
+tbody tr:hover {
+  background-color: rgba(239, 48, 56, 0.15) !important;
+}
+
+table td,
+table th {
+  border-color: #363640 !important;
+}
+
+tbody td.text-gray-400,
+tbody td.text-gray-500,
+tbody td.text-slate-400,
+tbody td.text-slate-500 {
+  color: #c5c5cf !important;
+}
+
+/* =========================================
+   DASHBOARD TEXT - CONTROLLED COLORS
+   No global span, paragraph or label override
+========================================= */
+
+/* Main titles */
+
+.gm-content h1,
+.gm-content h2,
+.gm-content h3,
+.gm-content h4 {
+  color: #ffffff;
+}
+
+/* Tailwind text colors - preserve semantic colors */
+
+.gm-content .text-white {
+  color: #ffffff !important;
+}
+
+.gm-content .text-gray-900,
+.gm-content .text-gray-800,
+.gm-content .text-gray-700,
+.gm-content .text-slate-900,
+.gm-content .text-slate-800 {
+  color: #f8fafc !important;
+}
+
+.gm-content .text-gray-600,
+.gm-content .text-gray-500,
+.gm-content .text-gray-400,
+.gm-content .text-slate-600,
+.gm-content .text-slate-500,
+.gm-content .text-slate-400 {
+  color: #c5c5cf !important;
+}
+
+/* Red highlights */
+
+.gm-content .text-brand-600,
+.gm-content .text-red-500,
+.gm-content .text-red-600 {
+  color: #ff555d !important;
+}
+
+/* Green status */
+
+.gm-content .text-green-500,
+.gm-content .text-green-600,
+.gm-content .text-emerald-500,
+.gm-content .text-emerald-600 {
+  color: #4ade80 !important;
+}
+
+/* Yellow / warning status */
+
+.gm-content .text-yellow-500,
+.gm-content .text-yellow-600,
+.gm-content .text-amber-500,
+.gm-content .text-amber-600 {
+  color: #fbbf24 !important;
+}
+
+/* Blue information */
+
+.gm-content .text-blue-500,
+.gm-content .text-blue-600,
+.gm-content .text-sky-500 {
+  color: #60a5fa !important;
+}
+
+/* Purple information */
+
+.gm-content .text-purple-500,
+.gm-content .text-purple-600,
+.gm-content .text-violet-500 {
+  color: #c084fc !important;
+}
+
+/* =========================================
+   DASHBOARD PANELS
+   Keep existing card designs
+========================================= */
+
+.gm-content .bg-white {
+  background-color: rgba(25, 25, 31, 0.94);
+}
+
+.gm-content .bg-gray-50 {
+  background-color: rgba(25, 25, 31, 0.92);
+}
+
+.gm-content .bg-gray-100 {
+  background-color: rgba(32, 32, 39, 0.94);
+}
+
+/* Borders */
+
+.gm-content .border-gray-200,
+.gm-content .border-gray-300 {
+  border-color: #383842 !important;
+}
+
+/* Inputs */
+
+.gm-content input,
+.gm-content select,
+.gm-content textarea {
+  color: #f8fafc;
+}
+
+.gm-content input::placeholder,
+.gm-content textarea::placeholder {
+  color: #92929f;
+}
+
+/* Preserve button-specific backgrounds and text colors */
+
+.gm-content button {
+  font: inherit;
+}
+
+/* Charts */
+
+.gm-content canvas {
+  max-width: 100%;
+}
+
+/* =========================================
+   END
+========================================= */
+
+/* =========================================
+   GYMMANAGER - PREMIUM VISUAL REDESIGN
+========================================= */
+
+/* BRIGHTER GYM BACKGROUND */
+
+.gm-content {
+  background-image:
+    linear-gradient(
+      rgba(10, 10, 15, 0.12),
+      rgba(10, 10, 15, 0.25)
+    ),
+    url("/images/gym.jpg") !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+/* PREMIUM SIDEBAR */
+
+.gm-sidebar {
+  background: linear-gradient(
+    180deg,
+    #19191f 0%,
+    #111116 100%
+  );
+  border-right: 1px solid rgba(255,255,255,0.09);
+  box-shadow: 8px 0 35px rgba(0,0,0,0.25);
+}
+
+.gm-brand {
+  padding-bottom: 32px;
+}
+
+.gm-logo-icon {
+  box-shadow:
+    0 0 20px rgba(239,48,56,0.35),
+    0 5px 15px rgba(0,0,0,0.3);
+}
+
+.gm-nav-item {
+  padding: 13px 14px;
+  margin: 4px 0;
+  border: 1px solid transparent;
+  border-radius: 12px;
+}
+
+.gm-nav-item:hover {
+  background: rgba(239,48,56,0.12);
+  border-color: rgba(239,48,56,0.18);
+}
+
+.gm-nav-active {
+  background: linear-gradient(
+    110deg,
+    #f0444d,
+    #c51e29
+  ) !important;
+  box-shadow: 0 5px 22px rgba(239,48,56,0.3);
+}
+
+/* PREMIUM TOPBAR */
+
+.gm-topbar {
+  background: rgba(23,23,29,0.96);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* DASHBOARD HEADINGS */
+
+.gm-content h1 {
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #ffffff !important;
+  text-shadow: 0 2px 15px rgba(0,0,0,0.35);
+}
+
+.gm-content h2 {
+  font-size: 21px;
+  font-weight: 750;
+  color: #ffffff !important;
+}
+
+.gm-content h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff !important;
+}
+
+/* DASHBOARD CARDS */
+
+.gm-content .grid > div {
+  background: rgba(25,25,32,0.88);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 17px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gm-content .grid > div:hover {
+  transform: translateY(-3px);
+  border-color: rgba(239,48,56,0.35);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.32);
+}
+
+/* STATISTICS NUMBERS */
+
+.gm-content .text-2xl,
+.gm-content .text-3xl,
+.gm-content .text-4xl {
+  font-weight: 800;
+  letter-spacing: -0.7px;
+}
+
+/* PREMIUM RED ACCENTS */
+
+.gm-content .text-brand-600,
+.gm-content .text-red-500 {
+  color: #ff555d !important;
+}
+
+/* TABLE DESIGN */
+
+.gm-content table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(23,23,30,0.94);
+}
+
+.gm-content thead th {
+  background: #29232b !important;
+  color: #ff777e !important;
+  padding: 16px;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+}
+
+.gm-content tbody td {
+  padding: 15px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: #eeeeF3 !important;
+}
+
+.gm-content tbody tr:nth-child(even) {
+  background: rgba(255,255,255,0.025);
+}
+
+.gm-content tbody tr:hover {
+  background: rgba(239,48,56,0.10) !important;
+}
+
+/* INPUT DESIGN */
+
+.gm-content input,
+.gm-content select,
+.gm-content textarea {
+  background: rgba(30,30,38,0.95);
+  color: white;
+  border: 1px solid #44404a;
+  border-radius: 10px;
+  padding: 10px 13px;
+  transition: all 0.2s ease;
+}
+
+.gm-content input:focus,
+.gm-content select:focus,
+.gm-content textarea:focus {
+  border-color: #ef3038;
+  box-shadow: 0 0 0 3px rgba(239,48,56,0.15);
+  outline: none;
+}
+
+.gm-content input::placeholder,
+.gm-content textarea::placeholder {
+  color: #a3a3ad;
+}
+
+/* BUTTON DESIGN */
+
+.gm-content button {
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.gm-content button.bg-brand-600,
+.gm-content button.bg-red-600 {
+  background: linear-gradient(135deg,#f0444d,#bd1e29);
+  box-shadow: 0 4px 14px rgba(239,48,56,0.22);
+}
+
+.gm-content button.bg-brand-600:hover,
+.gm-content button.bg-red-600:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+/* CHART CONTAINERS */
+
+.gm-content canvas {
+  max-width: 100%;
+}
+
+.gm-content svg {
+  max-width: 100%;
+}
+
+/* PREMIUM DIVIDERS */
+
+.gm-content hr {
+  border-color: rgba(255,255,255,0.10);
+}
+
+/* SMOOTH SCROLLING */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .gm-content .grid > div {
+    border-radius: 13px;
+  }
+
+  .gm-content h1 {
+    font-size: 25px;
+  }
+}
